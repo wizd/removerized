@@ -4,12 +4,10 @@ export const siteConfig = {
   name: "Removerized - Free AI-Powered Background Remover Tool",
   description:
     "Effortlessly Remove Image Backgrounds with AI - Free & Limitless with Offline Support",
-  mainNav: [
-
-  ],
-  links: {
-    twitter: "https://twitter.com/yossthedev",
-    github: "https://github.com/yossTheDev/removerized",
-    telegram: "https://t.me/yosstdv"
-  },
+  mainNav: [],
+  // links: {
+  //   twitter: "https://twitter.com/yossthedev",
+  //   github: "https://github.com/yossTheDev/removerized",
+  //   telegram: "https://t.me/yosstdv"
+  // },
 }

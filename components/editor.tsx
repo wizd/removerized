@@ -56,24 +56,22 @@ export const Editor = () => {
     let config: Config = {
       model: "isnet_quint8",
       debug: true,
-      // publicPath: "http://localhost:3000/ai-data/", // path to the wasm files
+      publicPath: process.env.PUBLIC_PATH, // path to the wasm files
       progress: (key, current, total) => {
         setDialogProgress(current)
         setDialogTotal(total)
         setDialogText(key)
 
         if (key.includes("fetch:"))
-          setDialogText(
-            "Downloading AI models. This was a little while ago the first time..."
-          )
-        if (key === "compute:inference") setDialogText("Processing image...")
+          setDialogText("正在下载AI模型。第一次可能需要一点时间...")
+        if (key === "compute:inference") setDialogText("处理中...")
       },
     }
 
     if (imageData) {
       const start = performance.now()
 
-      setDialogText("Starting...")
+      setDialogText("开始处理...")
       setShowDialog(true)
 
       removeBackground(imageData!, config).then((blob: Blob) => {
@@ -84,9 +82,7 @@ export const Editor = () => {
         setShowDialog(false)
         const end = performance.now()
         const time = end - start
-        toast.success(
-          `🚀 Successful operation in  ${Math.floor(time / 1000)} s`
-        )
+        toast.success(`🚀  处理成功，耗时 ${Math.floor(time / 1000)} s`)
 
         sendGAEvent({ event: "removeBackground", value: "success" })
         setResultData(url)
@@ -142,7 +138,7 @@ export const Editor = () => {
                   height={150}
                   className="flex max-h-80 w-full rounded-xl"
                   src={imageData}
-                  alt="Selected image"
+                  alt="上传的图片"
                 />
               ) : (
                 <div className="flex h-80 w-[36rem] items-center justify-center rounded-xl bg-neutral-200 dark:bg-neutral-900">
@@ -160,7 +156,7 @@ export const Editor = () => {
                     height={150}
                     className="grid-pattern flex max-h-80 w-full rounded-xl "
                     src={resultData}
-                    alt="Processed image"
+                    alt="处理后的图片"
                   />
                 </div>
               ) : (
