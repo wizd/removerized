@@ -1,20 +1,21 @@
 /**
  * @type {import('next').Config}
  */
-import withSerwistInit from "@serwist/next";
+import withSerwistInit from "@serwist/next"
 
 const withSerwist = withSerwistInit({
   // Note: This is only an example. If you use Pages Router,
   // use something else that works, such as "service-worker/index.ts".
   swSrc: "app/sw.ts",
   swDest: "public/sw.js",
-});
+})
 
 export default withSerwist({
   reactStrictMode: true,
   serverRuntimeConfig: {
-    runtime: "edge"
+    runtime: "edge",
   },
+  output: "standalone",
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
@@ -27,18 +28,18 @@ export default withSerwist({
   async headers() {
     return [
       {
-        source: '/',
+        source: "/",
         headers: [
           {
-            key: 'Cross-Origin-Embedder-Policy',
-            value: 'require-corp',
+            key: "Cross-Origin-Embedder-Policy",
+            value: "require-corp",
           },
           {
-            key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin',
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin",
           },
         ],
       },
-    ];
+    ]
   },
-});
+})

@@ -10,7 +10,7 @@ export default async function IndexPage() {
       {/* Hero */}
       <div className="group flex flex-col items-center justify-center md:w-2/4">
         <div className="mt-14 flex flex-col items-center justify-center md:mt-0 md:w-96">
-          <a
+          {/* <a
             className="mb-4 w-fit p-0 md:self-start"
             href="https://www.producthunt.com/posts/removerized?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-removerized"
             target="_blank"
@@ -22,12 +22,12 @@ export default async function IndexPage() {
               width="170"
               height="34"
             />
-          </a>
+          </a> */}
 
           <h1 className="animate-fade-in-up text-center text-4xl font-bold md:text-start md:text-6xl lg:text-7xl">
-            <span>Free Background Remover Tool with</span>
+            <span>图片消背景</span>
             <br></br>
-            <span>AI</span>
+            <span>AI 驱动</span>
             <span className="inline-block">
               <Icons.SolarStarsBoldDuotone className="flex group-hover:animate-tada"></Icons.SolarStarsBoldDuotone>
             </span>

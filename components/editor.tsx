@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react"
 import Image from "next/image"
-import imglyRemoveBackground, { Config } from "@imgly/background-removal"
+import { Config, removeBackground } from "@imgly/background-removal"
 import { sendGAEvent } from "@next/third-parties/google"
 import { ReactCompareSlider } from "react-compare-slider"
 import { toast } from "sonner"
@@ -54,7 +54,7 @@ export const Editor = () => {
     ev.preventDefault()
 
     let config: Config = {
-      model: "small",
+      model: "isnet_quint8",
       debug: true,
       // publicPath: "http://localhost:3000/ai-data/", // path to the wasm files
       progress: (key, current, total) => {
@@ -76,7 +76,7 @@ export const Editor = () => {
       setDialogText("Starting...")
       setShowDialog(true)
 
-      imglyRemoveBackground(imageData!, config).then((blob: Blob) => {
+      removeBackground(imageData!, config).then((blob: Blob) => {
         // result is a blob encoded as PNG.
         // It can be converted to an URL to be used as HTMLImage.src
         const url = URL.createObjectURL(blob)
@@ -118,11 +118,11 @@ export const Editor = () => {
             <div className="flex w-full flex-col items-center justify-center pb-4 pt-3 ">
               <Icons.SolarCloudUploadBoldDuotone className="size-8"></Icons.SolarCloudUploadBoldDuotone>
               <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
-                <span className="font-semibold">Click to upload</span>
-                &nbsp; or drag and drop
+                <span className="font-semibold">点击上传</span>
+                &nbsp; 或 拖拽上传
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                PNG, JPG or WEBP file
+                PNG, JPG or WEBP 格式图片
               </p>
             </div>
           </FileInput>
@@ -184,7 +184,7 @@ export const Editor = () => {
           disabled={!imageData}
         >
           <Icons.SolarGalleryRemoveLineDuotone className="mr-2 size-5"></Icons.SolarGalleryRemoveLineDuotone>
-          Process
+          去除背景
         </Button>
 
         <Button
@@ -194,14 +194,14 @@ export const Editor = () => {
           onClick={handleDownload}
         >
           <Icons.SolarDownloadMinimalisticBoldDuotone className="mr-2 size-5"></Icons.SolarDownloadMinimalisticBoldDuotone>
-          Download
+          下载
         </Button>
       </div>
 
       <AlertDialog open={showDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Processing</AlertDialogTitle>
+            <AlertDialogTitle>处理中</AlertDialogTitle>
             <AlertDialogDescription className="flex flex-col gap-2">
               <p>{dialogText}</p>
               {dialogText.includes("Downloading") ? (
